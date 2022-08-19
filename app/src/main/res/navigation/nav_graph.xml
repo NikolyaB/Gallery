@@ -8,26 +8,27 @@
         android:id="@+id/navigation_new"
         android:name="com.example.gallery.NewFragment"
         android:label="New"
-        tools:layout="@layout/fragment_new" >
+        tools:layout="@layout/fragment_gallery" >
         <action
-            android:id="@+id/action_navigation_new_to_infoFragment"
+            android:id="@+id/action_navigation_images_to_infoFragment"
             app:destination="@id/infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_popular"
         android:name="com.example.gallery.PopularFragment"
         android:label="Popular"
-        tools:layout="@layout/fragment_popular" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_navigation_images_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.gallery.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" >
-        <action
-            android:id="@+id/action_infoFragment_to_navigation_new"
-            app:destination="@id/navigation_new" />
         <argument
-            android:name="new"
-            app:argType="com.example.gallery.New" />
+            android:name="image"
+            app:argType="com.example.gallery.Image" />
     </fragment>
 </navigation>

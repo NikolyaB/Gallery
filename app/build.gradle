@@ -60,15 +60,18 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
 
     // define any required OkHttp artifacts without version
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation 'com.squareup.okhttp3:okhttp'
+    implementation 'com.squareup.okhttp3:logging-interceptor'
 
     //RxJava
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-    implementation "io.reactivex.rxjava2:rxjava:2.2.19"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
 
+    //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
 
+    //SwipeRefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'

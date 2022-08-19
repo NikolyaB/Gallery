@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 class InfoFragment : Fragment() {
 
     private val args: InfoFragmentArgs by navArgs()
-    private lateinit var new: New
+    private lateinit var image: Image
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +22,7 @@ class InfoFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_info, container, false)
 
-        new = args.new
+        image = args.image
 
         return view
     }
@@ -32,11 +32,11 @@ class InfoFragment : Fragment() {
         val iInfo = view.findViewById<ImageView>(R.id.imageInfo)
         var iTitle = view.findViewById<TextView>(R.id.titleInfo)
         var iDescription = view.findViewById<TextView>(R.id.descriptionInfo)
-        iTitle.text = new.title
-        iDescription.text = new.description
+        iTitle.text = image.title
+        iDescription.text = image.description
 
         Glide.with(this)
-            .load(new.imageURL)
+            .load(image.imageURL)
             .into(iInfo)
     }
 

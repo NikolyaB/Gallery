@@ -23,7 +23,7 @@ class GalleryApp: Application() {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://gallery.prod1.webant.ru")
+            .baseUrl("https://gallery.prod1.webant.ru/api/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

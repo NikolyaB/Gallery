@@ -9,57 +9,72 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gallery.databinding.FragmentGalleryBinding
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 @SuppressLint("StaticFieldLeak")
-private lateinit var adapter: NewAdapter
 private lateinit var recyclerView: RecyclerView
-private lateinit var imageData: ArrayList<New>
-const val ApiURL: String = "https://gallery.prod1.webant.ru/media/"
-
+@SuppressLint("StaticFieldLeak")
+private lateinit var adapter: GalleryAdapter
+private lateinit var imageData: ArrayList<Image>
+private const val ApiURL: String = "https://gallery.prod1.webant.ru/media/"
+@SuppressLint("StaticFieldLeak")
+private lateinit var binding: FragmentGalleryBinding
 
 class NewFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new, container, false)
+    ): View {
+        binding = FragmentGalleryBinding.inflate(layoutInflater)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchDataList((activity?.application as? GalleryApp)?.galleryApi)
         imageData = arrayListOf()
-        val layoutManager = GridLayoutManager(context, 2)
-        recyclerView = requireView().findViewById(R.id.rView)
-        recyclerView.layoutManager = layoutManager
+        fetchDataList((activity?.application as? GalleryApp)?.galleryApi)
+        refreshApp()
     }
 
-
     private val compositeDisposable = CompositeDisposable()
-    fun fetchDataList(galleryApi: GalleryApi?) {
+    private fun fetchDataList(galleryApi: GalleryApi?) {
         galleryApi?.let {
-            compositeDisposable.add(galleryApi.getDataList()
+            compositeDisposable.add(galleryApi.getDataList(true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
                     response.data.forEach{
-                        imageData.add(New(imageURL = ApiURL + it.image.name,
-                            title = it.title, description = it.description))
+                        imageData.add(Image(imageURL = ApiURL + it.image.name,
+                                            title = it.title, description = it.description))
                     }
-                    adapter = NewAdapter(requireActivity(), imageData)
-                    Log.d("TAG", imageData.toString())
+                    val layoutManager = GridLayoutManager(context, 2)
+                    recyclerView = binding.rView
+                    recyclerView.layoutManager = layoutManager
+                    adapter = GalleryAdapter(requireActivity(), imageData)
                     recyclerView.adapter = adapter
+                    binding.rView.visibility = View.VISIBLE
+                    binding.imageNotInternet.visibility = View.GONE
+                    binding.textFirstNotInternet.visibility = View.GONE
+                    binding.textLastNotInternet.visibility = View.GONE
                 }, {
+                    binding.rView.visibility = View.GONE
+                    binding.imageNotInternet.visibility = View.VISIBLE
+                    binding.textFirstNotInternet.visibility = View.VISIBLE
+                    binding.textLastNotInternet.visibility = View.VISIBLE
                 }))
+        }
+    }
+
+    private fun refreshApp() {
+        binding.run {
+            swipeToRefresh.setOnRefreshListener {
+                fetchDataList((activity?.application as? GalleryApp)?.galleryApi)
+                swipeToRefresh.isRefreshing = false
+            }
         }
     }
 
