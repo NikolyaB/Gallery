@@ -6,7 +6,7 @@
     app:startDestination="@id/navigation_new">
     <fragment
         android:id="@+id/navigation_new"
-        android:name="com.example.gallery.NewFragment"
+        android:name="com.example.gallery.ui.screens.NewFragment"
         android:label="New"
         tools:layout="@layout/fragment_gallery" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_popular"
-        android:name="com.example.gallery.PopularFragment"
+        android:name="com.example.gallery.ui.screens.PopularFragment"
         android:label="Popular"
         tools:layout="@layout/fragment_gallery" >
         <action
@@ -24,11 +24,11 @@
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.example.gallery.InfoFragment"
+        android:name="com.example.gallery.ui.screens.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" >
         <argument
             android:name="image"
-            app:argType="com.example.gallery.Image" />
+            app:argType="com.example.gallery.ui.model.ListDataItems" />
     </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.gallery
+package com.example.gallery.data.storage.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -16,4 +16,7 @@ data class ListDataItems(
     val description: String
 )
 
-data class ImageItem (val name: String)
+data class ImageItem (
+    @SerializedName("name")
+    val name: String
+)

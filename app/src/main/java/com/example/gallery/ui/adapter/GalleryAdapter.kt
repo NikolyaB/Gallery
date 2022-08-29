@@ -1,6 +1,5 @@
-package com.example.gallery
+package com.example.gallery.ui.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +8,12 @@ import android.widget.ImageView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.gallery.databinding.ListItemBinding
+import com.example.gallery.R
+import com.example.gallery.ui.model.ListDataItems
+import com.example.gallery.ui.screens.NewFragmentDirections
 
-@SuppressLint("StaticFieldLeak")
 
-class GalleryAdapter(private val context: Context, private val imageList: ArrayList<Image>) : RecyclerView.Adapter<GalleryAdapter.NewHolder>() {
+class GalleryAdapter(private val context: Context, private val imageList: List<ListDataItems>) : RecyclerView.Adapter<GalleryAdapter.NewHolder>() {
 
     class NewHolder(view: View): RecyclerView.ViewHolder(view) {
         var imageNew: ImageView = view.findViewById(R.id.im)
@@ -28,7 +28,7 @@ class GalleryAdapter(private val context: Context, private val imageList: ArrayL
     override fun onBindViewHolder(holder: NewHolder, position: Int) {
         val images = imageList[position]
         Glide.with(context)
-            .load(images.imageURL)
+            .load(ApiURL + images.image.name)
             .into(holder.imageNew)
 
         holder.itemView.setOnClickListener{
@@ -38,4 +38,8 @@ class GalleryAdapter(private val context: Context, private val imageList: ArrayL
     }
 
     override fun getItemCount(): Int = imageList.size
+
+    companion object {
+        private const val ApiURL: String = "https://gallery.prod1.webant.ru/media/"
+    }
 }

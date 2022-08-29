@@ -1,4 +1,4 @@
-package com.example.gallery
+package com.example.gallery.ui.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,12 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.gallery.R
+import com.example.gallery.ui.model.ListDataItems
 
 
 class InfoFragment : Fragment() {
 
     private val args: InfoFragmentArgs by navArgs()
-    private lateinit var image: Image
+    private lateinit var image: ListDataItems
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +38,12 @@ class InfoFragment : Fragment() {
         iDescription.text = image.description
 
         Glide.with(this)
-            .load(image.imageURL)
+            .load(ApiURL + image.image.name)
             .into(iInfo)
+    }
+
+    companion object {
+        private const val ApiURL: String = "https://gallery.prod1.webant.ru/media/"
     }
 
 }
