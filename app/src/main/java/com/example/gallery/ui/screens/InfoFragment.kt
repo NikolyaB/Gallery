@@ -23,7 +23,6 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_info, container, false)
-
         image = args.image
 
         return view
@@ -41,6 +40,7 @@ class InfoFragment : Fragment() {
             .load(ApiURL + image.image.name)
             .into(iInfo)
     }
+    
 
     companion object {
         private const val ApiURL: String = "https://gallery.prod1.webant.ru/media/"
