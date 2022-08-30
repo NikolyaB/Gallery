@@ -1,7 +1,7 @@
 package com.example.gallery.ui.screens
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -12,13 +12,12 @@ import com.example.gallery.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navController = findNavController(R.id.navHostFragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
@@ -27,13 +26,16 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val bNav : BottomNavigationView = binding.bNav
+    }
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+    override fun onStart() {
+        super.onStart()
+        
+        val bNav: BottomNavigationView = binding.bNav
+
+        val navController = findNavController(R.id.navHostFragment)
         appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_new, R.id.navigation_popular
-            )
+            setOf(R.id.graph_new, R.id.graph_popular)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bNav.setupWithNavController(navController)

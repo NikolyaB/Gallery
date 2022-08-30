@@ -17,6 +17,5 @@ data class ListDataItems(
 )
 
 data class ImageItem (
-    @SerializedName("name")
     val name: String
 )

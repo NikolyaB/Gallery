@@ -1,6 +1,6 @@
 package com.example.gallery.di
 
-import com.example.gallery.ui.screens.NewFragment
+import com.example.gallery.ui.screens.news.NewFragment
 import com.example.gallery.ui.screens.PopularFragment
 import dagger.Component
 

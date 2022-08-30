@@ -16,8 +16,10 @@ import com.example.gallery.ui.adapter.GalleryAdapter
 import javax.inject.Inject
 
 private lateinit var recyclerView: RecyclerView
+
 @SuppressLint("StaticFieldLeak")
 private lateinit var adapter: GalleryAdapter
+
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: FragmentGalleryBinding
 
@@ -29,7 +31,7 @@ class PopularFragment : Fragment() {
 
 
     override fun onAttach(context: Context) {
-        (context.applicationContext as GalleryApp).appComponent.inject(this)
+        GalleryApp.appComponent.inject(this)
         super.onAttach(context)
     }
 

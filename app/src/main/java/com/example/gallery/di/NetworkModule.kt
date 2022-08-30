@@ -12,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class NetworkModule {
 
+    //todo("add chucker")
     @Provides
     fun provideGalleryApi(): GalleryApi {
         val httpLoggingInterceptor = HttpLoggingInterceptor()

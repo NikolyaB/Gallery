@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_popular"
+    app:startDestination="@id/popularFragment">
+
+    <fragment
+        android:id="@+id/popularFragment"
+        android:name="com.example.gallery.ui.screens.PopularFragment"
+        android:label="PopularFragment"
+        tools:layout="@layout/fragment_gallery">
+        <action
+            android:id="@+id/action_popularFragment_to_infoFragment2"
+            app:destination="@id/infoFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment2"
+        android:name="com.example.gallery.ui.screens.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info">
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+    </fragment>
+</navigation>

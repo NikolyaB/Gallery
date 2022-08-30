@@ -1,32 +1,31 @@
-package com.example.gallery.ui.screens
+package com.example.gallery.ui.screens.news
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gallery.domain.datamodel.ListDataItems
-import com.example.gallery.domain.usecase.GetDataImageListPopularUseCase
+import com.example.gallery.domain.usecase.ImagesUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class PopularViewModel(
-    private val getDataImageListPopularUseCase: GetDataImageListPopularUseCase
+class NewViewModel(
+    private val getDataImageListNewUseCase: ImagesUseCase
 ) : ViewModel() {
 
-    private var resultLiveMutable = MutableLiveData<List<ListDataItems>>()
-    val resultLive: MutableLiveData<List<ListDataItems>> = resultLiveMutable
-    private var internetErrorLive = MutableLiveData<Boolean>()
-    val internetError: MutableLiveData<Boolean> = internetErrorLive
+    private val resultLiveMutable = MutableLiveData<List<ListDataItems>>()
+    val resultLive: LiveData<List<ListDataItems>> = resultLiveMutable
+    private val internetErrorLive = MutableLiveData<Boolean>()
+    val internetError: LiveData<Boolean> = internetErrorLive
     private val compositeDisposable = CompositeDisposable()
-
 
     init {
         getData()
     }
 
-
     fun getData() {
-        val dataImage = getDataImageListPopularUseCase.execute()
-        compositeDisposable.add(dataImage
+        //todo("исправить")
+        getDataImageListNewUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -36,8 +35,7 @@ class PopularViewModel(
                 }, {
                     internetErrorLive.value = true
                 }
-            )
-        )
+            ).let(compositeDisposable::add)
     }
 
     override fun onCleared() {

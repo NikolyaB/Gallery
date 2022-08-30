@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_new"
+        android:id="@+id/graph_new"
         android:icon="@drawable/ic_new"
         android:title="@string/new_bottom_menu" />
 
     <item
-        android:id="@+id/navigation_popular"
+        android:id="@+id/graph_popular"
         android:icon="@drawable/ic_popular"
         android:title="@string/popular_bottom_menu" />
 </menu>
