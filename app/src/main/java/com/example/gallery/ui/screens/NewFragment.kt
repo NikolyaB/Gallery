@@ -10,9 +10,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gallery.GalleryApp
 import com.example.gallery.databinding.FragmentGalleryBinding
-import com.example.gallery.di.AppComponent
-import com.example.gallery.di.DaggerAppComponent
 import com.example.gallery.ui.adapter.GalleryAdapter
 import javax.inject.Inject
 
@@ -30,11 +29,8 @@ class NewFragment : Fragment() {
 
     private lateinit var vm: NewViewModel
 
-    lateinit var appComponent: AppComponent
-
     override fun onAttach(context: Context) {
-        appComponent = DaggerAppComponent.builder().build()
-        appComponent.inject(this)
+        (context.applicationContext as GalleryApp).appComponent.inject(this)
         super.onAttach(context)
     }
 

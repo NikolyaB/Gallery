@@ -25,7 +25,6 @@
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.gallery.ui.screens.InfoFragment"
-        android:label="fragment_info"
         tools:layout="@layout/fragment_info" >
         <argument
             android:name="image"

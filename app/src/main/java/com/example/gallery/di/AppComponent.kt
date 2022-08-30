@@ -10,6 +10,6 @@ import dagger.Component
     DomainModule::class,
     NetworkModule::class])
 interface AppComponent {
-    fun inject(newFragment: NewFragment)
-    fun inject(popularFragment: PopularFragment)
+    fun inject(fragment: NewFragment)
+    fun inject(fragment: PopularFragment)
 }
