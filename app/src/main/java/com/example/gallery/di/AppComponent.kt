@@ -1,13 +1,12 @@
 package com.example.gallery.di
 
 import com.example.gallery.ui.screens.news.NewFragment
-import com.example.gallery.ui.screens.PopularFragment
+import com.example.gallery.ui.screens.populars.PopularFragment
 import dagger.Component
 
 @Component(modules = [
     AppModule::class,
     DataModule::class,
-    DomainModule::class,
     NetworkModule::class])
 interface AppComponent {
     fun inject(fragment: NewFragment)

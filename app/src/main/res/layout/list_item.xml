@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
-        app:cardElevation="0dp">
+        app:cardElevation="100dp">
         <!--todo("Naming id")-->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivPhoto"

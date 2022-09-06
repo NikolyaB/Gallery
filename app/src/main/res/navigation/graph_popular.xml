@@ -7,20 +7,20 @@
 
     <fragment
         android:id="@+id/popularFragment"
-        android:name="com.example.gallery.ui.screens.PopularFragment"
-        android:label="PopularFragment"
+        android:name="com.example.gallery.ui.screens.populars.PopularFragment"
+        android:label="Popular"
         tools:layout="@layout/fragment_gallery">
         <action
-            android:id="@+id/action_popularFragment_to_infoFragment2"
-            app:destination="@id/infoFragment2" />
+            android:id="@+id/action_popularFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/infoFragment2"
-        android:name="com.example.gallery.ui.screens.InfoFragment"
-        android:label="fragment_info"
+        android:id="@+id/infoFragment"
+        android:name="com.example.gallery.ui.screens.detailImages.InfoFragment"
+        android:label=""
         tools:layout="@layout/fragment_info">
         <argument
-            android:name="imageUrl"
+            android:name="imageName"
             app:argType="string" />
         <argument
             android:name="title"

@@ -1,28 +1,22 @@
 package com.example.gallery.di
 
 import com.example.gallery.domain.usecase.ImagesUseCase
-import com.example.gallery.domain.usecase.GetDataImageListPopularUseCase
 import com.example.gallery.ui.screens.NewViewModelFactory
 import com.example.gallery.ui.screens.PopularViewModelFactory
+import com.example.gallery.ui.screens.populars.PopularFragment
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module
 class AppModule() {
-
     @Provides
-    fun provideNewViewModelFactory(
-        getDataImageListNewUseCase: ImagesUseCase
-    ): NewViewModelFactory {
-        return NewViewModelFactory(getDataImageListNewUseCase = getDataImageListNewUseCase)
+    fun provideNewViewModelFactory(imagesUseCase: ImagesUseCase): NewViewModelFactory {
+        return NewViewModelFactory(imagesUseCase = imagesUseCase)
     }
 
     @Provides
-    fun providePopularViewModelFactory(
-        getDataImageListPopularUseCase: GetDataImageListPopularUseCase
-    ): PopularViewModelFactory {
-        return PopularViewModelFactory(getDataImageListPopularUseCase = getDataImageListPopularUseCase)
+    fun providePopularViewModelFactory(imagesUseCase: ImagesUseCase): PopularViewModelFactory {
+        return PopularViewModelFactory(imagesUseCase = imagesUseCase)
     }
-
-
 }

@@ -10,9 +10,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class NewViewModel(
-    private val getDataImageListNewUseCase: ImagesUseCase
+    private val imagesUseCase: ImagesUseCase
 ) : ViewModel() {
-
     private val resultLiveMutable = MutableLiveData<List<ListDataItems>>()
     val resultLive: LiveData<List<ListDataItems>> = resultLiveMutable
     private val internetErrorLive = MutableLiveData<Boolean>()
@@ -25,7 +24,7 @@ class NewViewModel(
 
     fun getData() {
         //todo("исправить")
-        getDataImageListNewUseCase.execute()
+        imagesUseCase.getNewImages()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

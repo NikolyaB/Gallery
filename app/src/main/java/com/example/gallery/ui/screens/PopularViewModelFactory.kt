@@ -2,15 +2,15 @@ package com.example.gallery.ui.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.gallery.domain.usecase.GetDataImageListPopularUseCase
+import com.example.gallery.domain.usecase.ImagesUseCase
+import com.example.gallery.ui.screens.populars.PopularViewModel
 
 class PopularViewModelFactory (
-    val getDataImageListPopularUseCase: GetDataImageListPopularUseCase
-    ): ViewModelProvider.Factory {
-
-    override fun <T: ViewModel> create(modelClass: Class<T>): T {
-        return PopularViewModel(
-            getDataImageListPopularUseCase = getDataImageListPopularUseCase
-        ) as T
+    val imagesUseCase: ImagesUseCase
+): ViewModelProvider.Factory {
+        override fun <T: ViewModel> create(modelClass: Class<T>): T {
+            return PopularViewModel(
+                imagesUseCase = imagesUseCase
+            ) as T
+        }
     }
-}

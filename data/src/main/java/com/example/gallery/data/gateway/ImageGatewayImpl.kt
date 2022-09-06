@@ -9,7 +9,7 @@ import com.example.gallery.domain.datamodel.ListDataItems
 import io.reactivex.Single
 import javax.inject.Inject
 
-class DataImageGatewayImpl @Inject constructor(private val galleryApi: GalleryApi) :
+class ImageGatewayImpl @Inject constructor(private val galleryApi: GalleryApi) :
     ImageGateway {
     override fun getNewImages(): Single<DataList> {
         val data = galleryApi.getDataImageList(new = true)

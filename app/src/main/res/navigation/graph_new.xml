@@ -8,18 +8,19 @@
     <fragment
         android:id="@+id/newFragment"
         android:name="com.example.gallery.ui.screens.news.NewFragment"
-        android:label="NewFragment">
+        android:label="New"
+        tools:layout="@layout/fragment_gallery">
         <action
             android:id="@+id/action_newFragment_to_infoFragment"
             app:destination="@id/infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.example.gallery.ui.screens.InfoFragment"
-        android:label="fragment_info"
+        android:name="com.example.gallery.ui.screens.detailImages.InfoFragment"
+        android:label=""
         tools:layout="@layout/fragment_info">
         <argument
-            android:name="imageUrl"
+            android:name="imageName"
             app:argType="string" />
         <argument
             android:name="title"

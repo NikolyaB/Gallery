@@ -1,15 +1,15 @@
-package com.example.gallery.ui.screens
+package com.example.gallery.ui.screens.populars
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gallery.domain.datamodel.ListDataItems
-import com.example.gallery.domain.usecase.GetDataImageListPopularUseCase
+import com.example.gallery.domain.usecase.ImagesUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class PopularViewModel(
-    private val getDataImageListPopularUseCase: GetDataImageListPopularUseCase
+    private val imagesUseCase: ImagesUseCase
 ) : ViewModel() {
 
     private var resultLiveMutable = MutableLiveData<List<ListDataItems>>()
@@ -25,7 +25,7 @@ class PopularViewModel(
 
 
     fun getData() {
-        val dataImage = getDataImageListPopularUseCase.execute()
+        val dataImage = imagesUseCase.getPopularImages()
         compositeDisposable.add(dataImage
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
