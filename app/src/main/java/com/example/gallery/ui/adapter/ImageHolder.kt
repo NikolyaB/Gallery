@@ -9,6 +9,7 @@ import com.example.gallery.domain.datamodel.ListDataItems
 class ImageHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(listDataItems: ListDataItems,
              onItemClicked: (imageList: ListDataItems) -> Unit) = binding.apply {
+
         Glide.with(root)
             .load(Constants.API_URL + listDataItems.image.name)
             .into(ivPhoto)
