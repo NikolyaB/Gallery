@@ -1,37 +1,44 @@
 package com.example.gallery.ui.screens
 
 import android.os.Bundle
+import android.view.MotionEvent
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.*
-import com.example.gallery.R
-import com.example.gallery.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.example.gallery.ui.screens.bottomNavigation.AppBottomNavigation
+import com.example.gallery.ui.screens.bottomNavigation.BottomNavigationScreens
+import com.example.gallery.ui.navigation.MainScreenNavigationConfigurations
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var appBarConfiguration: AppBarConfiguration
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.navHostFragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+        setContent {
+            val navController = rememberNavController()
+
+            val bottomNavigationItems = listOf(
+                BottomNavigationScreens.New,
+                BottomNavigationScreens.Popular
+            )
+
+            Scaffold(
+                bottomBar = {
+                    AppBottomNavigation(navController, bottomNavigationItems)
+                }
+            ) { padding ->
+                Box(modifier = Modifier.padding(padding)) {
+                    MainScreenNavigationConfigurations(navController)
+                }
+            }
+        }
+    }
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        return ev?.getPointerCount()!! <= 3 && super.dispatchTouchEvent(ev)
     }
 
-    override fun onStart() {
-        super.onStart()
-        val bNav: BottomNavigationView = binding.bNav
-        val navController = findNavController(R.id.navHostFragment)
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.newFragment, R.id.popularFragment)
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        bNav.setupWithNavController(navController)
-    }
 }

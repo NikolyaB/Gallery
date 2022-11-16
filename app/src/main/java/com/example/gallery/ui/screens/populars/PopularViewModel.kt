@@ -7,7 +7,7 @@ import io.reactivex.schedulers.Schedulers
 
 class PopularViewModel(
     private val imagesUseCase: ImagesUseCase
-) : BaseGalleryViewModel() {
+): BaseGalleryViewModel() {
 
     init {
         getData()
@@ -19,7 +19,7 @@ class PopularViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    resultLiveMutable.postValue(it.data)
+                    resultLiveMutable.postValue(it)
                 }, { }
             ).let(compositeDisposable::add)
     }

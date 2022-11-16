@@ -4,18 +4,20 @@ import com.google.gson.annotations.SerializedName
 
 data class DataListResponse (
     @SerializedName("data")
-    val data: List<ListDataItems>
+    val data: List<ListDataItems>?
 )
 
 data class ListDataItems(
     @SerializedName("image")
-    val image: ImageItem,
+    val image: ImageItem?,
     @SerializedName("name")
-    val title: String,
+    val title: String?,
     @SerializedName("description")
-    val description: String
+    val description: String?
 )
 
+
 data class ImageItem (
+    @SerializedName("name")
     val name: String
 )
