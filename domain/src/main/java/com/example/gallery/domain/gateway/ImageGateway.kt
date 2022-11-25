@@ -1,10 +1,9 @@
 package com.example.gallery.domain.gateway
 
 import com.example.gallery.domain.datamodel.DataList
-import com.example.gallery.domain.datamodel.ListDataItems
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 
 interface ImageGateway {
-    fun getNewImages(): Single<DataList>
-    fun getPopularImages(): Single<DataList>
+    suspend fun getNewImages(): DataList
+    suspend fun getPopularImages(): DataList
 }

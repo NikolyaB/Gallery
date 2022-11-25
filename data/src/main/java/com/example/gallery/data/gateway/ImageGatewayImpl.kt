@@ -1,34 +1,29 @@
 package com.example.gallery.data.gateway
 
+import android.telephony.mbms.DownloadStatusListener
+import android.util.Log
 import com.example.gallery.data.storage.models.DataListResponse
-import com.example.gallery.data.storage.network.GalleryApi
+import com.example.gallery.data.storage.network.GalleryServiceImpl
 import com.example.gallery.domain.gateway.ImageGateway
 import com.example.gallery.domain.datamodel.DataList
-import io.reactivex.Single
+import com.example.gallery.domain.datamodel.ImageItem
+import com.example.gallery.domain.datamodel.ListDataItems
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ImageGatewayImpl constructor(val galleryApi: GalleryApi) : ImageGateway {
-    override fun getNewImages(): Single<DataList> {
-        val data = galleryApi.getDataImageList(new = true)
-        return mapToDomain(data)
-    }
+class ImageGatewayImpl constructor(val galleryServiceImpl: GalleryServiceImpl) : ImageGateway {
+    override suspend fun getNewImages() = mapToDomain(galleryServiceImpl.getDataImageList("new"))
+    override suspend fun getPopularImages() = mapToDomain(galleryServiceImpl.getDataImageList("popular"))
 
-    override fun getPopularImages(): Single<DataList> {
-        val data = galleryApi.getDataImageList(popular = true)
-        return mapToDomain(data)
-    }
-
-    private fun mapToDomain(dataListResponse: Single<DataListResponse>): Single<DataList> {
-        return dataListResponse.map {
-            com.example.gallery.domain.datamodel.DataList(it.data?.map { dataListDataItems ->
-                with(dataListDataItems) {
-                    com.example.gallery.domain.datamodel.ListDataItems(
-                        com.example.gallery.domain.datamodel.ImageItem(image?.name),
-                        title,
-                        description
-                    )
-                }
-            }
-            )
-        }
+    private fun mapToDomain(dataList: DataListResponse): DataList {
+        return DataList(data = dataList.data?.map {
+            ListDataItems(ImageItem(it.image?.name), it.title, it.description)
+        })
     }
 }
+

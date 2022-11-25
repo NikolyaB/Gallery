@@ -1,23 +1,22 @@
 package com.example.gallery.data.storage.models
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class DataListResponse (
-    @SerializedName("data")
-    val data: List<ListDataItems>?
+    val data: List<ListDataItemsResponse>?
 )
 
-data class ListDataItems(
-    @SerializedName("image")
+@Serializable
+data class ListDataItemsResponse(
     val image: ImageItem?,
-    @SerializedName("name")
+    @SerialName("name")
     val title: String?,
-    @SerializedName("description")
     val description: String?
 )
 
-
+@Serializable
 data class ImageItem (
-    @SerializedName("name")
-    val name: String
+    val name: String?
 )

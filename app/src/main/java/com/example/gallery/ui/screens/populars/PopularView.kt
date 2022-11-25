@@ -10,5 +10,5 @@ fun PopularView(
     navController: NavController,
     viewModel: PopularViewModel = koinViewModel()
 ) {
-    BaseGalleryView(navController = navController, viewModel.resultLive.value?.data.orEmpty())
+    BaseGalleryView(navController = navController, viewModel.dataImage.value.data.orEmpty())
 }

@@ -5,6 +5,7 @@ import com.example.gallery.di.appModule
 import com.example.gallery.di.dataModule
 import com.example.gallery.di.domainModule
 import com.example.gallery.di.networkModule
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow

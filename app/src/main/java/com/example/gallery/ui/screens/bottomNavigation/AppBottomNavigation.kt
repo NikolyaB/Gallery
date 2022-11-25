@@ -1,32 +1,23 @@
 package com.example.gallery.ui.screens.bottomNavigation
 
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.gallery.R
-import com.example.gallery.ui.screens.BaseGalleryView
 
 @Composable
 fun AppBottomNavigation(navController: NavHostController,
                         items: List<BottomNavigationScreens>
 ) {
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.white),
-
+        backgroundColor = colorResource(id = R.color.white)
     ) {
         items.forEach { screen ->
             val currentRoute = currentRoute(navController = navController)
@@ -45,7 +36,15 @@ fun AppBottomNavigation(navController: NavHostController,
                 alwaysShowLabel = true,
                 onClick = {
                     if (currentRoute != screen.route) {
-                        navController.navigate(screen.route)
+                        navController.navigate(screen.route) {
+                            navController.graph.startDestinationRoute?.let { screen_route ->
+                                popUpTo(screen_route) {
+                                    saveState = true
+                                }
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 }
             )
@@ -58,4 +57,3 @@ private fun currentRoute(navController: NavHostController): String? {
     val backStackEntry = navController.currentBackStackEntryAsState()
     return backStackEntry.value?.destination?.route
 }
-

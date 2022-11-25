@@ -24,7 +24,7 @@ fun InfoView(imageName: String?, title: String?, description: String?) {
     Column(modifier = Modifier.fillMaxHeight()) {
 
         Image(
-            painter = rememberAsyncImagePainter(model = (Constants.API_URL + imageName) ?: " "),
+            painter = rememberAsyncImagePainter(model = (Constants.API_URL + imageName)),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier

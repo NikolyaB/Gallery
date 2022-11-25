@@ -2,9 +2,7 @@ package com.example.gallery.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -29,12 +27,12 @@ fun BaseGalleryView(
 }
 
 @Composable
-private fun VerticalGrid(imageData: List<ListDataItems>, navController: NavController, onClick: () -> Unit = {}) {
+private fun VerticalGrid(imageData: List<ListDataItems>, navController: NavController) {
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(2)
     ) {
         items(imageData) { imageData ->
-            ImageItem(imageData, navController)
+        ImageItem(imageData, navController)
         }
     }
 }
@@ -53,9 +51,10 @@ private fun ImageItem(data: ListDataItems, navController: NavController) {
             .height(129.dp)
             .width(179.dp)
             .clip(RoundedCornerShape(corner = CornerSize(12.dp)))
-            .clickable { navController.navigate(
-                Screens.Info.withArgs(imageName.value, title.value, description.value)
-            )
+            .clickable {
+                navController.navigate(
+                    Screens.Info.withArgs(imageName.value, title.value, description.value)
+                )
             }
     )
 }
